@@ -1,0 +1,193 @@
+{
+  "target_col": "Units_Sold",
+  "feature_columns": [
+    "Store_ID",
+    "Product_ID",
+    "Category",
+    "Region",
+    "Inventory_Level",
+    "Units_Ordered",
+    "Price",
+    "Discount",
+    "Weather_Condition",
+    "Holiday_Promotion",
+    "Competitor_Pricing",
+    "Seasonality",
+    "Year",
+    "Month",
+    "Day",
+    "DayOfWeek",
+    "Quarter",
+    "Is_Weekend",
+    "Discounted_Price",
+    "Price_Difference",
+    "Inventory_Level_Log"
+  ],
+  "numeric_features": [
+    "Inventory_Level",
+    "Units_Ordered",
+    "Price",
+    "Discount",
+    "Holiday_Promotion",
+    "Competitor_Pricing",
+    "Is_Weekend",
+    "Discounted_Price",
+    "Price_Difference",
+    "Inventory_Level_Log"
+  ],
+  "categorical_features": [
+    "Store_ID",
+    "Product_ID",
+    "Category",
+    "Region",
+    "Weather_Condition",
+    "Seasonality"
+  ],
+  "best_model_name": "Gradient Boosting",
+  "metrics": [
+    {
+      "Model": "Gradient Boosting",
+      "MAE": 68.06694084233506,
+      "RMSE": 86.31987583413705,
+      "R2_Score": 0.326417251911855
+    },
+    {
+      "Model": "Linear Regression",
+      "MAE": 68.15115646874595,
+      "RMSE": 86.40763087447478,
+      "R2_Score": 0.3250469921151241
+    },
+    {
+      "Model": "Random Forest",
+      "MAE": 68.29242740959651,
+      "RMSE": 86.68617728912294,
+      "R2_Score": 0.32068837773885417
+    },
+    {
+      "Model": "Decision Tree",
+      "MAE": 69.57379464777684,
+      "RMSE": 88.6772515688557,
+      "R2_Score": 0.2891241017304995
+    }
+  ],
+  "category_options": {
+    "Store_ID": [
+      "S001",
+      "S002",
+      "S003",
+      "S004",
+      "S005"
+    ],
+    "Product_ID": [
+      "P0001",
+      "P0002",
+      "P0003",
+      "P0004",
+      "P0005",
+      "P0006",
+      "P0007",
+      "P0008",
+      "P0009",
+      "P0010",
+      "P0011",
+      "P0012",
+      "P0013",
+      "P0014",
+      "P0015",
+      "P0016",
+      "P0017",
+      "P0018",
+      "P0019",
+      "P0020"
+    ],
+    "Category": [
+      "Clothing",
+      "Electronics",
+      "Furniture",
+      "Groceries",
+      "Toys"
+    ],
+    "Region": [
+      "East",
+      "North",
+      "South",
+      "West"
+    ],
+    "Weather_Condition": [
+      "Cloudy",
+      "Rainy",
+      "Snowy",
+      "Sunny"
+    ],
+    "Seasonality": [
+      "Autumn",
+      "Spring",
+      "Summer",
+      "Winter"
+    ]
+  },
+  "raw_columns": [
+    "Date",
+    "Store ID",
+    "Product ID",
+    "Category",
+    "Region",
+    "Inventory Level",
+    "Units Sold",
+    "Units Ordered",
+    "Demand Forecast",
+    "Price",
+    "Discount",
+    "Weather Condition",
+    "Holiday/Promotion",
+    "Competitor Pricing",
+    "Seasonality"
+  ],
+  "clean_columns": [
+    "Store_ID",
+    "Product_ID",
+    "Category",
+    "Region",
+    "Inventory_Level",
+    "Units_Sold",
+    "Units_Ordered",
+    "Price",
+    "Discount",
+    "Weather_Condition",
+    "Holiday_Promotion",
+    "Competitor_Pricing",
+    "Seasonality",
+    "Year",
+    "Month",
+    "Day",
+    "DayOfWeek",
+    "Quarter",
+    "Is_Weekend",
+    "Discounted_Price",
+    "Price_Difference",
+    "Inventory_Level_Log"
+  ],
+  "default_values": {
+    "Store_ID": "S004",
+    "Product_ID": "P0015",
+    "Category": "Furniture",
+    "Region": "East",
+    "Inventory_Level": 271.0,
+    "Units_Ordered": 110.0,
+    "Price": 55.08,
+    "Discount": 10.0,
+    "Weather_Condition": "Rainy",
+    "Holiday_Promotion": 0.0,
+    "Competitor_Pricing": 55.04,
+    "Seasonality": "Spring",
+    "Year": "2023",
+    "Month": "1",
+    "Day": "1",
+    "DayOfWeek": "0",
+    "Quarter": "3",
+    "Is_Weekend": 0.0,
+    "Discounted_Price": 49.212,
+    "Price_Difference": 0.0,
+    "Inventory_Level_Log": 5.605802066295998
+  }
+}
