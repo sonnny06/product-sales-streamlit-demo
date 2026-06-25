@@ -5,6 +5,7 @@ import joblib
 import numpy as np
 import pandas as pd
 import streamlit as st
+import plotly.express as px
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -126,130 +127,268 @@ with st.expander("Project information", expanded=False):
     metrics_df = pd.DataFrame(metadata["metrics"])
     st.dataframe(metrics_df, use_container_width=True)
 
-left, right = st.columns([1, 1])
+tab_prediction, tab_performance, tab_comparison, tab_explain = st.tabs([
+    "Prediction",
+    "Model Performance",
+    "Algorithm Comparison",
+    "Explainability"
+])
 
-category_options = metadata["category_options"]
-defaults = metadata["default_values"]
+with tab_prediction:
+    left, right = st.columns([1, 1])
 
-with left:
-    st.subheader("1. Input new business data")
+    category_options = metadata["category_options"]
+    defaults = metadata["default_values"]
 
-    date_value = st.date_input("Date")
+    with left:
+        st.subheader("1. Input new business data")
 
-    col_a, col_b = st.columns(2)
-    with col_a:
-        store_id = st.selectbox(
-            "Store ID",
-            category_options.get("Store_ID", ["S001"]),
-            index=0,
+        date_value = st.date_input("Date")
+
+        col_a, col_b = st.columns(2)
+        with col_a:
+            store_id = st.selectbox(
+                "Store ID",
+                category_options.get("Store_ID", ["S001"]),
+                index=0,
+            )
+            category = st.selectbox(
+                "Category",
+                category_options.get("Category", ["Electronics"]),
+                index=0,
+            )
+            region = st.selectbox(
+                "Region",
+                category_options.get("Region", ["North"]),
+                index=0,
+            )
+        with col_b:
+            product_id = st.selectbox(
+                "Product ID",
+                category_options.get("Product_ID", ["P0001"]),
+                index=0,
+            )
+            weather_condition = st.selectbox(
+                "Weather Condition",
+                category_options.get("Weather_Condition", ["Sunny"]),
+                index=0,
+            )
+            seasonality = st.selectbox(
+                "Seasonality",
+                category_options.get("Seasonality", ["Summer"]),
+                index=0,
+            )
+
+        col_c, col_d = st.columns(2)
+        with col_c:
+            inventory_level = st.number_input(
+                "Inventory Level",
+                min_value=0,
+                max_value=10000,
+                value=int(defaults.get("Inventory_Level", 100)),
+                step=1,
+            )
+            units_ordered = st.number_input(
+                "Units Ordered",
+                min_value=0,
+                max_value=10000,
+                value=int(defaults.get("Units_Ordered", 100)),
+                step=1,
+            )
+            price = st.number_input(
+                "Price",
+                min_value=0.0,
+                max_value=100000.0,
+                value=float(defaults.get("Price", 50.0)),
+                step=1.0,
+            )
+
+        with col_d:
+            discount = st.slider(
+                "Discount (%)",
+                min_value=0,
+                max_value=100,
+                value=int(defaults.get("Discount", 10)),
+            )
+            competitor_pricing = st.number_input(
+                "Competitor Pricing",
+                min_value=0.0,
+                max_value=100000.0,
+                value=float(defaults.get("Competitor_Pricing", 50.0)),
+                step=1.0,
+            )
+            holiday_promotion = st.selectbox(
+                "Holiday / Promotion",
+                options=[0, 1],
+                format_func=lambda x: "Yes" if x == 1 else "No",
+                index=int(defaults.get("Holiday_Promotion", 0)),
+            )
+
+        predict_button = st.button("Predict Units Sold", type="primary", use_container_width=True)
+
+    form_data = {
+        "Date": date_value,
+        "Store_ID": store_id,
+        "Product_ID": product_id,
+        "Category": category,
+        "Region": region,
+        "Inventory_Level": inventory_level,
+        "Units_Ordered": units_ordered,
+        "Price": price,
+        "Discount": discount,
+        "Weather_Condition": weather_condition,
+        "Holiday_Promotion": holiday_promotion,
+        "Competitor_Pricing": competitor_pricing,
+        "Seasonality": seasonality,
+    }
+
+    with right:
+        st.subheader("2. Prediction output")
+
+        input_df = build_model_input(form_data, metadata)
+
+        if predict_button:
+            prediction = float(model.predict(input_df)[0])
+            prediction = max(0, prediction)
+
+            st.metric("Predicted Units Sold", f"{prediction:,.0f} units")
+            st.info(f"Demand Level: **{demand_level(prediction)}**")
+            st.success(business_recommendation(prediction, inventory_level))
+
+            st.write("Model input after feature engineering:")
+            st.dataframe(input_df, use_container_width=True)
+        else:
+            st.write("Enter business data, then click **Predict Units Sold**.")
+
+
+
+with tab_performance:
+    st.header("Model Performance")
+
+    best_metrics = metadata.get("best_model_metrics", {})
+
+    if best_metrics:
+        col1, col2, col3 = st.columns(3)
+        col1.metric("MAE", round(best_metrics.get("MAE", 0), 2))
+        col2.metric("RMSE", round(best_metrics.get("RMSE", 0), 2))
+        col3.metric("R² Score", round(best_metrics.get("R2_Score", 0), 4))
+
+        st.info(
+            """
+            MAE and RMSE measure prediction error. Lower values are better.
+            R² Score measures how well the model explains the variation in Units Sold.
+            """
         )
-        category = st.selectbox(
-            "Category",
-            category_options.get("Category", ["Electronics"]),
-            index=0,
-        )
-        region = st.selectbox(
-            "Region",
-            category_options.get("Region", ["North"]),
-            index=0,
-        )
-    with col_b:
-        product_id = st.selectbox(
-            "Product ID",
-            category_options.get("Product_ID", ["P0001"]),
-            index=0,
-        )
-        weather_condition = st.selectbox(
-            "Weather Condition",
-            category_options.get("Weather_Condition", ["Sunny"]),
-            index=0,
-        )
-        seasonality = st.selectbox(
-            "Seasonality",
-            category_options.get("Seasonality", ["Summer"]),
-            index=0,
-        )
-
-    col_c, col_d = st.columns(2)
-    with col_c:
-        inventory_level = st.number_input(
-            "Inventory Level",
-            min_value=0,
-            max_value=10000,
-            value=int(defaults.get("Inventory_Level", 100)),
-            step=1,
-        )
-        units_ordered = st.number_input(
-            "Units Ordered",
-            min_value=0,
-            max_value=10000,
-            value=int(defaults.get("Units_Ordered", 100)),
-            step=1,
-        )
-        price = st.number_input(
-            "Price",
-            min_value=0.0,
-            max_value=100000.0,
-            value=float(defaults.get("Price", 50.0)),
-            step=1.0,
-        )
-
-    with col_d:
-        discount = st.slider(
-            "Discount (%)",
-            min_value=0,
-            max_value=100,
-            value=int(defaults.get("Discount", 10)),
-        )
-        competitor_pricing = st.number_input(
-            "Competitor Pricing",
-            min_value=0.0,
-            max_value=100000.0,
-            value=float(defaults.get("Competitor_Pricing", 50.0)),
-            step=1.0,
-        )
-        holiday_promotion = st.selectbox(
-            "Holiday / Promotion",
-            options=[0, 1],
-            format_func=lambda x: "Yes" if x == 1 else "No",
-            index=int(defaults.get("Holiday_Promotion", 0)),
-        )
-
-    predict_button = st.button("Predict Units Sold", type="primary", use_container_width=True)
-
-form_data = {
-    "Date": date_value,
-    "Store_ID": store_id,
-    "Product_ID": product_id,
-    "Category": category,
-    "Region": region,
-    "Inventory_Level": inventory_level,
-    "Units_Ordered": units_ordered,
-    "Price": price,
-    "Discount": discount,
-    "Weather_Condition": weather_condition,
-    "Holiday_Promotion": holiday_promotion,
-    "Competitor_Pricing": competitor_pricing,
-    "Seasonality": seasonality,
-}
-
-with right:
-    st.subheader("2. Prediction output")
-
-    input_df = build_model_input(form_data, metadata)
-
-    if predict_button:
-        prediction = float(model.predict(input_df)[0])
-        prediction = max(0, prediction)
-
-        st.metric("Predicted Units Sold", f"{prediction:,.0f} units")
-        st.info(f"Demand Level: **{demand_level(prediction)}**")
-        st.success(business_recommendation(prediction, inventory_level))
-
-        st.write("Model input after feature engineering:")
-        st.dataframe(input_df, use_container_width=True)
     else:
-        st.write("Enter business data, then click **Predict Units Sold**.")
+        st.warning("Best model metrics are not available. Please run train_model.py again.")
+
+    actual_vs_predicted = metadata.get("actual_vs_predicted", [])
+
+    if actual_vs_predicted:
+        actual_pred_df = pd.DataFrame(actual_vs_predicted)
+
+        st.subheader("Actual vs Predicted Units Sold")
+
+        fig_actual_pred = px.scatter(
+            actual_pred_df,
+            x="Actual",
+            y="Predicted",
+            title="Actual vs Predicted Units Sold",
+            labels={
+                "Actual": "Actual Units Sold",
+                "Predicted": "Predicted Units Sold"
+            }
+        )
+
+        st.plotly_chart(fig_actual_pred, use_container_width=True)
+        st.dataframe(actual_pred_df.head(20), use_container_width=True)
+    else:
+        st.warning("Actual vs Predicted data is not available. Please run train_model.py again.")
+
+
+with tab_comparison:
+    st.header("Algorithm Comparison")
+
+    metrics_df = pd.DataFrame(metadata["metrics"])
+
+    st.subheader("Model Evaluation Table")
+    st.dataframe(metrics_df, use_container_width=True)
+
+    st.subheader("Comparison by R² Score")
+
+    fig_r2 = px.bar(
+        metrics_df,
+        x="Model",
+        y="R2_Score",
+        text="R2_Score",
+        title="Algorithm Comparison by R² Score"
+    )
+
+    st.plotly_chart(fig_r2, use_container_width=True)
+
+    st.subheader("Comparison by RMSE")
+
+    fig_rmse = px.bar(
+        metrics_df,
+        x="Model",
+        y="RMSE",
+        text="RMSE",
+        title="Algorithm Comparison by RMSE"
+    )
+
+    st.plotly_chart(fig_rmse, use_container_width=True)
+
+    st.success(
+        f"""
+        The selected final model is **{metadata['best_model_name']}**.
+        It is selected based on lower RMSE and strong overall evaluation performance.
+        """
+    )
+
+
+with tab_explain:
+    st.header("Model Explainability")
+
+    st.write(
+        """
+        This section shows which input features have the strongest influence
+        on the prediction of Units Sold.
+        """
+    )
+
+    feature_importance = metadata.get("feature_importance", [])
+
+    if feature_importance:
+        feature_df = pd.DataFrame(feature_importance)
+
+        st.subheader("Top Feature Importance")
+
+        fig_feature = px.bar(
+            feature_df.sort_values("Importance", ascending=True),
+            x="Importance",
+            y="Feature",
+            orientation="h",
+            title="Top Feature Importance"
+        )
+
+        st.plotly_chart(fig_feature, use_container_width=True)
+        st.dataframe(feature_df, use_container_width=True)
+
+        top_feature = feature_df.iloc[0]["Feature"]
+
+        st.info(
+            f"""
+            The most influential feature is **{top_feature}**.
+            This means the model relies heavily on this variable when predicting Units Sold.
+            """
+        )
+    else:
+        st.warning(
+            """
+            Feature importance is not available. Please run train_model.py again,
+            or check whether the selected model supports feature importance.
+            """
+        )
 
 st.divider()
 
