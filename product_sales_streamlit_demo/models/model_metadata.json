@@ -55,9 +55,9 @@
     {
       "Model": "Tuned Random Forest",
       "MAE": 68.1335138370088,
-      "MSE": 7465.553851114705,
-      "RMSE": 86.4034365700503,
-      "R2_Score": 0.3251125161816909
+      "MSE": 7465.553851114703,
+      "RMSE": 86.40343657005029,
+      "R2_Score": 0.325112516181691
     },
     {
       "Model": "Linear Regression",
@@ -69,9 +69,9 @@
     {
       "Model": "Random Forest",
       "MAE": 68.27243074468085,
-      "MSE": 7507.624269063529,
-      "RMSE": 86.64654793506507,
-      "R2_Score": 0.32130934242139086
+      "MSE": 7507.624269063527,
+      "RMSE": 86.64654793506506,
+      "R2_Score": 0.321309342421391
     },
     {
       "Model": "Decision Tree",
@@ -79,6 +79,477 @@
       "MSE": 7863.654945806121,
       "RMSE": 88.6772515688557,
       "R2_Score": 0.2891241017304995
+    }
+  ],
+  "best_model_metrics": {
+    "Model": "Gradient Boosting",
+    "MAE": 68.06500388163018,
+    "MSE": 7450.998535007082,
+    "RMSE": 86.31916667233925,
+    "R2_Score": 0.3264283195179145
+  },
+  "actual_vs_predicted": [
+    {
+      "Actual": 61,
+      "Predicted": 102.14861310391125
+    },
+    {
+      "Actual": 56,
+      "Predicted": 36.496224449995616
+    },
+    {
+      "Actual": 131,
+      "Predicted": 122.37029009349195
+    },
+    {
+      "Actual": 108,
+      "Predicted": 85.43260897234786
+    },
+    {
+      "Actual": 261,
+      "Predicted": 216.93603547884905
+    },
+    {
+      "Actual": 84,
+      "Predicted": 84.81453281710242
+    },
+    {
+      "Actual": 80,
+      "Predicted": 167.01528359053793
+    },
+    {
+      "Actual": 404,
+      "Predicted": 205.89541612895698
+    },
+    {
+      "Actual": 269,
+      "Predicted": 154.55740365020162
+    },
+    {
+      "Actual": 128,
+      "Predicted": 147.49080172934555
+    },
+    {
+      "Actual": 377,
+      "Predicted": 191.9472254283315
+    },
+    {
+      "Actual": 198,
+      "Predicted": 203.3983442780296
+    },
+    {
+      "Actual": 122,
+      "Predicted": 116.81227546957717
+    },
+    {
+      "Actual": 130,
+      "Predicted": 105.00308066662221
+    },
+    {
+      "Actual": 110,
+      "Predicted": 147.77919894911838
+    },
+    {
+      "Actual": 256,
+      "Predicted": 188.7258364126895
+    },
+    {
+      "Actual": 54,
+      "Predicted": 172.63701360707233
+    },
+    {
+      "Actual": 83,
+      "Predicted": 150.37666525450678
+    },
+    {
+      "Actual": 353,
+      "Predicted": 179.2396130531186
+    },
+    {
+      "Actual": 94,
+      "Predicted": 190.1385573851297
+    },
+    {
+      "Actual": 82,
+      "Predicted": 195.92029120138952
+    },
+    {
+      "Actual": 7,
+      "Predicted": 51.287588876847806
+    },
+    {
+      "Actual": 220,
+      "Predicted": 183.01522744215424
+    },
+    {
+      "Actual": 115,
+      "Predicted": 107.6158031741649
+    },
+    {
+      "Actual": 13,
+      "Predicted": 178.14804818595513
+    },
+    {
+      "Actual": 259,
+      "Predicted": 179.5572955268372
+    },
+    {
+      "Actual": 74,
+      "Predicted": 82.44420978933023
+    },
+    {
+      "Actual": 320,
+      "Predicted": 218.0344239641883
+    },
+    {
+      "Actual": 52,
+      "Predicted": 127.77688657694485
+    },
+    {
+      "Actual": 68,
+      "Predicted": 127.7812565567256
+    },
+    {
+      "Actual": 135,
+      "Predicted": 74.7529737317278
+    },
+    {
+      "Actual": 108,
+      "Predicted": 104.25411237060915
+    },
+    {
+      "Actual": 109,
+      "Predicted": 121.52158993258976
+    },
+    {
+      "Actual": 131,
+      "Predicted": 216.95225716579674
+    },
+    {
+      "Actual": 172,
+      "Predicted": 182.50665889350543
+    },
+    {
+      "Actual": 375,
+      "Predicted": 205.12246418581643
+    },
+    {
+      "Actual": 104,
+      "Predicted": 153.38976824412816
+    },
+    {
+      "Actual": 189,
+      "Predicted": 90.67803601815059
+    },
+    {
+      "Actual": 31,
+      "Predicted": 74.91297244930249
+    },
+    {
+      "Actual": 79,
+      "Predicted": 100.24182249446416
+    },
+    {
+      "Actual": 60,
+      "Predicted": 210.1322662854728
+    },
+    {
+      "Actual": 125,
+      "Predicted": 101.77964363274234
+    },
+    {
+      "Actual": 11,
+      "Predicted": 30.40912454443957
+    },
+    {
+      "Actual": 91,
+      "Predicted": 189.8277019643611
+    },
+    {
+      "Actual": 47,
+      "Predicted": 43.887460411806266
+    },
+    {
+      "Actual": 20,
+      "Predicted": 127.85142159821207
+    },
+    {
+      "Actual": 44,
+      "Predicted": 105.77412616529091
+    },
+    {
+      "Actual": 129,
+      "Predicted": 214.27007583077665
+    },
+    {
+      "Actual": 159,
+      "Predicted": 214.6506279809514
+    },
+    {
+      "Actual": 43,
+      "Predicted": 44.08414107674605
+    },
+    {
+      "Actual": 51,
+      "Predicted": 59.09752516014261
+    },
+    {
+      "Actual": 23,
+      "Predicted": 164.48023133090786
+    },
+    {
+      "Actual": 101,
+      "Predicted": 180.17625714688486
+    },
+    {
+      "Actual": 204,
+      "Predicted": 204.69646910026964
+    },
+    {
+      "Actual": 83,
+      "Predicted": 80.37449338922532
+    },
+    {
+      "Actual": 238,
+      "Predicted": 215.70627672002965
+    },
+    {
+      "Actual": 269,
+      "Predicted": 136.37048486452
+    },
+    {
+      "Actual": 18,
+      "Predicted": 117.89174643234124
+    },
+    {
+      "Actual": 46,
+      "Predicted": 33.71036779167293
+    },
+    {
+      "Actual": 217,
+      "Predicted": 163.26824412316157
+    },
+    {
+      "Actual": 23,
+      "Predicted": 105.9150197084567
+    },
+    {
+      "Actual": 158,
+      "Predicted": 159.37368270673838
+    },
+    {
+      "Actual": 170,
+      "Predicted": 139.39339152253254
+    },
+    {
+      "Actual": 52,
+      "Predicted": 61.43460363182849
+    },
+    {
+      "Actual": 287,
+      "Predicted": 217.79264752317448
+    },
+    {
+      "Actual": 415,
+      "Predicted": 217.97506458001862
+    },
+    {
+      "Actual": 28,
+      "Predicted": 188.98862089296725
+    },
+    {
+      "Actual": 11,
+      "Predicted": 88.08832162684539
+    },
+    {
+      "Actual": 39,
+      "Predicted": 181.30714864183085
+    },
+    {
+      "Actual": 262,
+      "Predicted": 166.39415211215623
+    },
+    {
+      "Actual": 72,
+      "Predicted": 48.490626535628024
+    },
+    {
+      "Actual": 6,
+      "Predicted": 180.04767573557768
+    },
+    {
+      "Actual": 258,
+      "Predicted": 133.55567610632642
+    },
+    {
+      "Actual": 42,
+      "Predicted": 66.18742493577064
+    },
+    {
+      "Actual": 250,
+      "Predicted": 180.79222972188276
+    },
+    {
+      "Actual": 259,
+      "Predicted": 145.40508813334574
+    },
+    {
+      "Actual": 285,
+      "Predicted": 204.41785624396633
+    },
+    {
+      "Actual": 64,
+      "Predicted": 216.3655861324191
+    },
+    {
+      "Actual": 141,
+      "Predicted": 101.48052964901792
+    },
+    {
+      "Actual": 182,
+      "Predicted": 136.90988868388558
+    },
+    {
+      "Actual": 124,
+      "Predicted": 68.45611519238888
+    },
+    {
+      "Actual": 193,
+      "Predicted": 217.7445371207147
+    },
+    {
+      "Actual": 100,
+      "Predicted": 216.7071469689009
+    },
+    {
+      "Actual": 45,
+      "Predicted": 31.369518494615253
+    },
+    {
+      "Actual": 5,
+      "Predicted": 157.28688556908233
+    },
+    {
+      "Actual": 417,
+      "Predicted": 203.75266911399177
+    },
+    {
+      "Actual": 91,
+      "Predicted": 80.72580267422693
+    },
+    {
+      "Actual": 224,
+      "Predicted": 203.46616887626115
+    },
+    {
+      "Actual": 66,
+      "Predicted": 52.09486255286187
+    },
+    {
+      "Actual": 150,
+      "Predicted": 154.39094735634342
+    },
+    {
+      "Actual": 127,
+      "Predicted": 123.80288048771587
+    },
+    {
+      "Actual": 49,
+      "Predicted": 103.10863842201303
+    },
+    {
+      "Actual": 144,
+      "Predicted": 164.52112935566527
+    },
+    {
+      "Actual": 85,
+      "Predicted": 48.346916501130195
+    },
+    {
+      "Actual": 3,
+      "Predicted": 225.21303549764968
+    },
+    {
+      "Actual": 105,
+      "Predicted": 87.60603745277946
+    },
+    {
+      "Actual": 142,
+      "Predicted": 150.389793188038
+    },
+    {
+      "Actual": 144,
+      "Predicted": 122.45875097613919
+    },
+    {
+      "Actual": 297,
+      "Predicted": 215.24521781653434
+    },
+    {
+      "Actual": 143,
+      "Predicted": 142.87701790762873
+    }
+  ],
+  "feature_importance": [
+    {
+      "Feature": "num__Inventory_Level",
+      "Importance": 0.6448124304888765
+    },
+    {
+      "Feature": "num__Inventory_Level_Log",
+      "Importance": 0.33902243514914276
+    },
+    {
+      "Feature": "num__Discounted_Price",
+      "Importance": 0.004458603690617819
+    },
+    {
+      "Feature": "num__Competitor_Pricing",
+      "Importance": 0.0020579286377541673
+    },
+    {
+      "Feature": "num__Price",
+      "Importance": 0.0019193529365012483
+    },
+    {
+      "Feature": "num__Price_Difference",
+      "Importance": 0.0017226909965734174
+    },
+    {
+      "Feature": "num__Units_Ordered",
+      "Importance": 0.0017071725418186271
+    },
+    {
+      "Feature": "cat__Store_ID_S005",
+      "Importance": 0.00037661417330201217
+    },
+    {
+      "Feature": "cat__Product_ID_P0015",
+      "Importance": 0.0003189657445488472
+    },
+    {
+      "Feature": "cat__Seasonality_Spring",
+      "Importance": 0.00029152145322875324
+    },
+    {
+      "Feature": "cat__Weather_Condition_Snowy",
+      "Importance": 0.00020796943320016578
+    },
+    {
+      "Feature": "cat__Product_ID_P0008",
+      "Importance": 0.00020652468468576826
+    },
+    {
+      "Feature": "cat__Weather_Condition_Cloudy",
+      "Importance": 0.00020338657612080529
+    },
+    {
+      "Feature": "cat__Category_Furniture",
+      "Importance": 0.00020298497259962198
+    },
+    {
+      "Feature": "cat__Seasonality_Autumn",
+      "Importance": 0.00019910770243231646
     }
   ],
   "best_params": {

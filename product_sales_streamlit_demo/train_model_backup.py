@@ -277,63 +277,14 @@ def main():
         "Predicted_by_Loaded_Model": loaded_predictions
     }))
 
-    # Extra dashboard data for Streamlit app
-    # 1) Actual vs Predicted: used to show how close predictions are to real values.
-    final_predictions = final_model.predict(X_test)
-
-    actual_vs_predicted_df = pd.DataFrame({
-        "Actual": y_test.values,
-        "Predicted": final_predictions
-    })
-
-    # Keep only 100 rows so the JSON file stays lightweight.
-    actual_vs_predicted_sample = actual_vs_predicted_df.head(100).to_dict(orient="records")
-
-    # 2) Feature Importance: used to explain which variables affect the prediction most.
-    feature_importance_data = []
-
-    try:
-        model_step = final_model.named_steps["model"]
-
-        if hasattr(model_step, "feature_importances_"):
-            importances = model_step.feature_importances_
-            preprocessor_step = final_model.named_steps["preprocessor"]
-
-            try:
-                feature_names = preprocessor_step.get_feature_names_out()
-            except Exception:
-                feature_names = [f"Feature_{i}" for i in range(len(importances))]
-
-            feature_importance_df = pd.DataFrame({
-                "Feature": feature_names,
-                "Importance": importances
-            }).sort_values(by="Importance", ascending=False)
-
-            feature_importance_data = feature_importance_df.head(15).to_dict(orient="records")
-
-    except Exception as e:
-        print("Could not create feature importance:", e)
-        feature_importance_data = []
-
-    # 3) Best model metrics: used to show MAE, RMSE, R2 in the dashboard.
-    best_model_metrics = final_results_df.iloc[0].to_dict()
-
-    # Metadata for Streamlit app dropdowns, input reconstruction, and dashboard
+    # Metadata for Streamlit app dropdowns and input reconstruction
     metadata = {
         "target_col": target_col,
         "feature_columns": X.columns.tolist(),
         "numeric_features": numeric_features,
         "categorical_features": categorical_features,
         "best_model_name": str(best_model_name),
-
-        # Existing key: model comparison table
         "metrics": final_results_df.to_dict(orient="records"),
-
-        # New keys: dashboard charts and explanation
-        "best_model_metrics": best_model_metrics,
-        "actual_vs_predicted": actual_vs_predicted_sample,
-        "feature_importance": feature_importance_data,
-
         "best_params": grid_search.best_params_,
         "category_options": {},
         "default_values": {},
